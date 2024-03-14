@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Coder/Decoder</title>
+    <style>
+        #container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        #imageInput, #codeInput {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <input type="file" id="imageInput" accept="image/*">
+        <textarea id="codeInput" rows="10" cols="50" placeholder="Cole o código da imagem aqui..."></textarea>
+        <button onclick="encodeImage()">Codificar Imagem</button>
+        <button onclick="decodeImage()">Descodificar Imagem</button>
+        <div id="output"></div>
+    </div>
+
+    <script>
+        function encodeImage() {
+            const input = document.getElementById('imageInput');
+            const file = input.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(event) {
+                const base64 = event.target.result;
+                const output = document.getElementById('output');
+                output.innerHTML = `<img src="${base64}" alt="Imagem Codificada">`;
+                document.getElementById('codeInput').value = base64;
+            };
+
+            reader.readAsDataURL(file);
+        }
+
+        function decodeImage() {
+            const codeInput = document.getElementById('codeInput');
+            const base64 = codeInput.value;
+            const output = document.getElementById('output');
+            output.innerHTML = `<img src="${base64}" alt="Imagem Descodificada">`;
+        }
+    </script>
+</body>
+</html>
