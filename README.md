@@ -1,0 +1,2 @@
+# image-coder
+NECESSARIO PQ O DISCORD CAIU
